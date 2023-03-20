@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 825px;
+  margin: 50px auto;
+  border: 5px solid #000;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.4;
+}
+
+.main-title {
+  text-align: center;
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 30px;
+  background-color: #f7f7f7;
+  padding: 20px 20px;
+  height: 40px;
+}
+
+.challenge-img {
+  margin: 0;
+  width: 25%;
+  height: auto;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 26px;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-top: 18px;
+}
+
+.shipping {
+  color: #aea8a8;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+.information {
+  margin-top: 30px;
+}
+
+.information:link,
+.information:visited {
+  color: black;
+}
+
+.information:hover,
+.information:active {
+  text-decoration: none;
+}
+
+.product-desc {
+  list-style: square;
+  margin-top: 16px;
+}
+
+li {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.add-button {
+  background-color: #000;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  height: 30px;
+  width: 100%;
+}
+
+.add-button:hover {
+  background-color: #fff;
+  color: #000;
+  border-top: #000 solid 5px;
+}
