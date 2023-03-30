@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-  width: 700px;
+  width: 800px;
   /* margin-left: auto;
   margin-right: auto; */
   margin: 0 auto;
@@ -30,6 +30,11 @@ body {
 .post-header {
   margin-bottom: 30px;
   position: relative;
+}
+
+nav {
+  font-size: 18px;
+  text-align: center;
 }
 
 article {
@@ -182,6 +187,7 @@ nav a:link {
   margin-right: 30px;
   margin-top: 10px;
   display: inline-block;
+  text-align: center;
 }
 
 nav a:link:last-child {

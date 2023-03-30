@@ -1,12 +1,15 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .container {
   width: 825px;
   margin: 50px auto;
   border: 5px solid #000;
+  position: relative;
+  clear: both;
 }
 
 body {
@@ -21,37 +24,42 @@ body {
   font-size: 30px;
   background-color: #f7f7f7;
   padding: 20px 20px;
-  height: 40px;
+  height: 80px;
 }
 
 .challenge-img {
-  margin: 0;
-  width: 25%;
+  /* float: left; */
   height: auto;
 }
 
 .price {
   font-weight: bold;
   font-size: 26px;
+  /* float: left; */
 }
 
 .description {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   margin-top: 18px;
+  margin-bottom: 20px;
+  /* clear: both; */
 }
 
 .shipping {
   color: #aea8a8;
+  /* float: right; */
 }
 
 h3 {
   font-size: 16px;
   font-weight: bold;
-  margin-top: 20px;
 }
+
 .information {
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  display: block;
 }
 
 .information:link,
@@ -66,11 +74,11 @@ h3 {
 
 .product-desc {
   list-style: square;
-  margin-top: 16px;
+  margin-top: 5px;
 }
 
 li {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: 20px;
 }
 
@@ -81,8 +89,8 @@ li {
   text-transform: uppercase;
   font-size: 20px;
   cursor: pointer;
-  margin-top: 10px;
-  height: 30px;
+  margin-top: 0;
+  height: 60px;
   width: 100%;
 }
 
@@ -90,4 +98,75 @@ li {
   background-color: #fff;
   color: #000;
   border-top: #000 solid 5px;
+}
+
+.sale {
+  background-color: orangered;
+  position: absolute;
+  top: -18px;
+  left: -30px;
+  width: 60px;
+  text-transform: uppercase;
+  padding: 5px;
+  letter-spacing: 2px;
+}
+
+.colors-devs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.color-dev {
+  background-color: #000;
+  width: 20px;
+  height: 20px;
+  /* margin: 4px; */
+  /* display: inline-block; */
+}
+
+.color-blue {
+  background-color: blue;
+}
+
+.color-red {
+  background-color: red;
+}
+
+.color-yellow {
+  background-color: yellow;
+}
+
+.color-green {
+  background-color: lightgreen;
+}
+
+.color-brown {
+  background-color: brown;
+}
+
+.info-container {
+  /* width: 243px; */
+  /* float: left; */
+  flex: 1;
+}
+
+.product-container {
+  /* width: 243px; */
+  /* float: left; */
+  margin-top: 20px;
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+
+.pricing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
 }
