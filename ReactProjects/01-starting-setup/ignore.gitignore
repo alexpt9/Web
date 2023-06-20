@@ -1,0 +1,6 @@
+# Ignore a specific file
+
+# Ignore all files with a specific extension
+
+# Ignore an entire directory
+node_modules/
