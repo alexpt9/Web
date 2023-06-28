@@ -1,0 +1,8 @@
+# Ignore a specific file
+
+# Ignore all files with a specific extension
+
+# Ignore an entire directory
+ReactProjects/01-starting-setup/node_modules/
+ReactProjects/02-starting-setup/node_modules/
+ReactProjects/03-starting-setup/node_modules/
