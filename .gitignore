@@ -1,0 +1,9 @@
+# Ignore a specific file
+**/package-lock.json
+
+# Ignore all files with a specific extension
+
+# Ignore an entire directory
+**/node_modules/
+**/node_modules/
+**/node_modules/
