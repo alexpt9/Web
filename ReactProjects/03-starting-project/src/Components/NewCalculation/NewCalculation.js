@@ -3,46 +3,76 @@ import React, { useState } from "react";
 import "./NewCalculation.css";
 
 const NewCalculation = (props) => {
-  const [enteredCurrentSaving, setEnteredCurrentSaving] = useState("");
-  const [enteredYearlySavings, setEnteredYearlySavings] = useState("");
-  const [enteredExpectedInterest, setEnteredExpectedInterest] = useState("");
+  const [enteredCurrentSaving, setEnteredCurrentSaving] = useState("10000");
+  const [enteredYearlySavings, setEnteredYearlySavings] = useState("1200");
+  const [enteredExpectedInterest, setEnteredExpectedInterest] = useState("5");
   const [enteredInvestmentDuration, setEnteredInvestmentDuration] =
-    useState("");
+    useState("5");
 
-  const inputChangeHandler = (identifier, value) => {
+  const inputChangeHandler = (identifier, event) => {
     if (identifier === "current") {
-      setEnteredCurrentSaving(value);
+      setEnteredCurrentSaving(event.target.value);
     } else if (identifier === "yearly") {
-      setEnteredYearlySavings(value);
+      setEnteredYearlySavings(event.target.value);
     } else if (identifier === "interest") {
-      setEnteredExpectedInterest(value);
+      setEnteredExpectedInterest(event.target.value);
     } else {
-      setEnteredInvestmentDuration(value);
+      setEnteredInvestmentDuration(event.target.value);
     }
+    event.stopPropagation();
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (
+      enteredCurrentSaving === "" ||
+      enteredExpectedInterest === "" ||
+      enteredInvestmentDuration === "" ||
+      enteredYearlySavings === ""
+    ) {
+      return;
+    }
+    const data = {
+      currentSaving: +enteredCurrentSaving,
+      yearlySavings: +enteredYearlySavings,
+      expectedInterest: +enteredExpectedInterest,
+      investmentDuration: +enteredInvestmentDuration,
+    };
+    console.log(data);
+    props.onCalculateInvestment(data);
+    setEnteredCurrentSaving(enteredCurrentSaving);
+    setEnteredYearlySavings(enteredYearlySavings);
+    setEnteredExpectedInterest(enteredExpectedInterest);
+    setEnteredInvestmentDuration(enteredInvestmentDuration);
   };
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={submitHandler}>
       <div className="input-group">
         <div>
           <label>curent savings (S))</label>
           <input
             type="number"
+            min={1}
+            value={enteredCurrentSaving}
             step={1}
             onChange={(event) =>
-              inputChangeHandler("current", event.target.value)
+              inputChangeHandler("current", event)
             }
-          ></input>
+          />
         </div>
         <div>
           <label>yearly savings (S))</label>
           <input
             type="number"
+            min={1}
             step={1}
+            value={enteredYearlySavings}
             onChange={(event) =>
-              inputChangeHandler("yearly", event.target.value)
+              inputChangeHandler("yearly", event)
             }
-          ></input>
+          />
         </div>
       </div>
       <div className="input-group">
@@ -50,25 +80,31 @@ const NewCalculation = (props) => {
           <label>expected interest (%, per year))</label>
           <input
             type="number"
+            min={1}
             step={1}
+            value={enteredExpectedInterest}
             onChange={(event) =>
-              inputChangeHandler("interest", event.target.value)
+              inputChangeHandler("interest", event)
             }
-          ></input>
+          />
         </div>
         <div>
           <label>investment duration (years))</label>
           <input
             type="number"
+            min={1}
             step={1}
+            value={enteredInvestmentDuration}
             onChange={(event) =>
-              inputChangeHandler("duration", event.target.value)
+              inputChangeHandler("duration", event)
             }
-          ></input>
+          />
         </div>
       </div>
       <div className="actions">
-        <button className="buttonAlt">Reset</button>
+        <button className="buttonAlt" type="button" onClick={props.onReset}>
+          Reset
+        </button>
         <button type="submit" className="button">
           Calculate
         </button>
