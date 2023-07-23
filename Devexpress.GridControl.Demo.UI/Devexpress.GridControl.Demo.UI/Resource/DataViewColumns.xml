@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Columns>
+  <Column>
+    <Id>FirstName</Id>
+    <EnName>First Name</EnName>
+    <HebName>שם פרטי</HebName>
+    <Type>Default</Type>
+    <Fixed>True</Fixed>
+    <Width>250</Width>
+  </Column>
+  <Column>
+    <Id>LastName</Id>
+    <EnName>Last Name</EnName>
+    <HebName>שם משפחה</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>FullName</Id>
+    <EnName>Full Name</EnName>
+    <HebName>שם מלא</HebName>
+     <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>NickName</Id>
+    <EnName>Nick Name</EnName>
+    <HebName>כינוי</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>Gender</Id>
+    <EnName>First Name</EnName>
+    <HebName>שם פרטי</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>Age</Id>
+    <EnName>AgeAgeAge</EnName>
+    <HebName>גיל</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>City</Id>
+    <EnName>City</EnName>
+    <HebName>עִיר</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>Nationality</Id>
+    <EnName>Nationality</EnName>
+    <HebName>לאום</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>DateOfBirth</Id>
+    <EnName>Date Of Birth</EnName>
+    <HebName>תאריך לידה</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>Occupation</Id>
+    <EnName>Occupation</EnName>
+    <HebName>כיבוש</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>Address</Id>
+    <EnName>Address</EnName>
+    <HebName>כתובת</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>CurrentOrganisation</Id>
+    <EnName>Current Organisation</EnName>
+    <HebName>הארגון הנוכחי</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>IncomePerYear</Id>
+    <EnName>Income Per Year</EnName>
+    <HebName>הכנסה לשנה</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>IncomePerMonth</Id>
+    <EnName>Income Per Month</EnName>
+    <HebName>הכנסה לחודש</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>IncomePerMonth</Id>
+    <EnName>Income Per Month</EnName>
+    <HebName>הכנסה לחודש</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>IncomePerMonth</Id>
+    <EnName>Income Per Month</EnName>
+    <HebName>הכנסה לחודש</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>IncomePerMonth</Id>
+    <EnName>Income Per Month</EnName>
+    <HebName>הכנסה לחודש</HebName>
+    <Type>Default</Type>
+  </Column>
+  <Column>
+    <Id>IncomePerMonth</Id>
+    <EnName>Income Per Month</EnName>
+    <HebName>הכנסה לחודש</HebName>
+    <Type>Default</Type>
+  </Column>
+</Columns>

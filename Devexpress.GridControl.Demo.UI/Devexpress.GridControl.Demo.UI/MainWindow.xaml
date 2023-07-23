@@ -1,0 +1,12 @@
+﻿<dx:ThemedWindow
+    x:Class="Devexpress.GridControl.Demo.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:local="clr-namespace:Devexpress.GridControl.Demo.UI.View"
+    ControlBoxButtonSet="Minimize,Close,MaximizeRestore"
+    FlowDirection="RightToLeft"
+    EnableAcrylic="True"
+    WindowState="Maximized">
+    <local:DataView/>
+</dx:ThemedWindow>
