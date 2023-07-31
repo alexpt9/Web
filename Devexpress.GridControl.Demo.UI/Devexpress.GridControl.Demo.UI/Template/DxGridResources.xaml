@@ -4,6 +4,8 @@
                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
                     xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
                     xmlns:dxci="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                    xmlns:behaviours="clr-namespace:Devexpress.GridControl.Demo.UI.Behaviours"
                     xmlns:converter="clr-namespace:Devexpress.GridControl.Demo.UI.Converter"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
@@ -13,11 +15,40 @@
     <converter:NumberToBooloeanConverter x:Key="numberToBooloeanConverter"/>
     <converter:DateTimeToBooleanConverter x:Key="dateTimeToBooloeanConverter"/>
 
+    <DataTemplate x:Key="CustomizationAreaTemplateKey">
+        <Button Width="10" 
+                Height="10" 
+                Padding="0" 
+                Background="Transparent">
+            <Button.Content>
+                <Image  
+                    Source="{dx:DXImage 'SvgImages/Dashboards/MasterFilter.svg'}" />
+            </Button.Content>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter Content="{TemplateBinding Content}"/>
+                </ControlTemplate>
+            </Button.Template>
+            <dxmvvm:Interaction.Behaviors>
+                <behaviours:ColumnSimpleButtonBehaviour/>
+            </dxmvvm:Interaction.Behaviors>
+        </Button>
+    </DataTemplate>
+
     <DataTemplate x:Key="LookupColumnTemplate">
         <dxg:GridColumn FieldName="{Binding Path=(dxci:DependencyObjectExtensions.DataContext).FieldName, RelativeSource={RelativeSource Self}}">
             <dxg:GridColumn.EditSettings>
                 <dxe:ComboBoxEditSettings ItemsSource="{Binding Source}"/>
             </dxg:GridColumn.EditSettings>
+            <dxg:GridColumn.HeaderCustomizationAreaTemplate>
+                <DataTemplate>
+                    <dx:SimpleButton Width="20" Height="20">
+                        <dxmvvm:Interaction.Behaviors>
+                            <behaviours:ColumnSimpleButtonBehaviour/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dx:SimpleButton>
+                </DataTemplate>
+            </dxg:GridColumn.HeaderCustomizationAreaTemplate>
         </dxg:GridColumn>
     </DataTemplate>
 
@@ -36,6 +67,7 @@
                         Header="{Binding Path=(dxci:DependencyObjectExtensions.DataContext).HeaderName, RelativeSource={RelativeSource Self}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                         Fixed="{Binding Path=(dxci:DependencyObjectExtensions.DataContext).Fixed, RelativeSource={RelativeSource Self}}"
                         Width="{Binding Path=(dxci:DependencyObjectExtensions.DataContext).Width, RelativeSource={RelativeSource Self}}"
+                        HeaderCustomizationAreaTemplate="{StaticResource CustomizationAreaTemplateKey}"
                         SortMode="Value">
             <dxg:GridColumn.CellTemplate>
                 <DataTemplate>
@@ -57,7 +89,9 @@
     </DataTemplate>
 
     <ControlTemplate x:Key="{dxgt:GridColumnHeaderThemeKey ResourceKey=ColumnFilterTemplate, IsThemeIndependent=True}" TargetType="{x:Type ToggleButton}">
-        <Grid x:Name="Root"
+        <Grid></Grid>
+    </ControlTemplate>
+    <!--Grid x:Name="Root"
               Background="#00000000"
               Height="13"
               Margin="40,4,0,0"
@@ -120,8 +154,8 @@
                         TargetName="Root"
                         Value="-8"/>
             </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
+        </ControlTemplate.Triggers>-->
+    
 
     <ControlTemplate x:Key="{dxgt:GridRowThemeKey ResourceKey=FixedLineSeparatorTemplate, ThemeName=Office2019White}" TargetType="dxg:RowFixedLineSeparatorControl">
         <Border BorderBrush="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}" BorderThickness="0.5,0,0,0"/>
