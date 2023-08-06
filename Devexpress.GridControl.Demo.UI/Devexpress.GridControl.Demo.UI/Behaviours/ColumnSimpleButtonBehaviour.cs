@@ -33,15 +33,21 @@ namespace Devexpress.GridControl.Demo.UI.Behaviours
         {
             AssociatedObject.Visibility = Visibility.Collapsed;
             GridColumnHeader colHeader = GetGridColumnHeader(sender);
-            colHeader.MouseEnter += ColHeader_MouseEnter;
-            colHeader.MouseLeave += ColHeader_MouseLeave;
+            if (colHeader != null)
+            {
+                colHeader.MouseEnter += ColHeader_MouseEnter;
+                colHeader.MouseLeave += ColHeader_MouseLeave;
+            }
         }
 
         private void AssociatedObject_Unloaded(object sender, RoutedEventArgs e)
         {
             GridColumnHeader colHeader = GetGridColumnHeader(sender);
-            colHeader.MouseEnter -= ColHeader_MouseEnter;
-            colHeader.MouseLeave -= ColHeader_MouseLeave;
+            if (colHeader != null)
+            {
+                colHeader.MouseEnter -= ColHeader_MouseEnter;
+                colHeader.MouseLeave -= ColHeader_MouseLeave;
+            }
         }
 
         private void ColHeader_MouseLeave(object sender, MouseEventArgs e)
@@ -57,13 +63,18 @@ namespace Devexpress.GridControl.Demo.UI.Behaviours
         private void AssociatedObject_Click(object sender, RoutedEventArgs e)
         {
             GridColumnHeader colHeader = GetGridColumnHeader(sender);
-            colHeader.ColumnFilterPopup.ShowPopup();
+            colHeader?.ColumnFilterPopup.ShowPopup();
         }
 
         private  GridColumnHeader GetGridColumnHeader(object sender)
         {
             var simpleButton = sender as Button;
+            if (simpleButton is null)
+                return null;
             var gridColumnData = simpleButton.DataContext as GridColumnData;
+            if (gridColumnData is null)
+                return null;
+
             var tableView = gridColumnData.View as TableView;
             GridColumnHeader colHeader = LayoutTreeHelper.GetVisualChildren(gridColumnData.View).OfType<GridColumnHeader>().
                 FirstOrDefault(h => (GridColumn)h.DataContext == gridColumnData.Column);
