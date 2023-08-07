@@ -1,0 +1,94 @@
+Important points to remember
+1) React portal present in 'react-dom'
+   ex: import ReactDOM from 'react-dom' 
+   ex: const portalElements = document.getElementById('overlays');
+       {ReactDOM.createPortal(<Backdrop />, portalElements)}
+       {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, portalElements)} 
+
+2) React Context
+   -> usually context are created in store folder under src
+   -> const CartContext = React.createContext({
+      items: [],
+      totalAmount: 0,
+      addItem: (item) => {},
+      removeItem: (id) => {},
+      });
+   -> const CartProvider = (props) => {
+      const addItemHandler = (item) => {};
+
+      const removeItemHandler = (id) => {};
+
+      const cartContext = {
+        items: [],
+        totalAmount: 0,
+        addItem: addItemHandler,
+        removeItem: removeItemHandler,
+      };
+
+      return (
+        <CartContext.Provider value={cartContext}>
+          {props.children}
+        </CartContext.Provider>
+      );
+    };
+3) React reducers
+    -> For complex state we use reducers which provide the exact state changes
+    -> import for reducer is import { useReducer } from 'react';
+    -> these reducers are written outside the provider function as shown below
+       const defaultCartState = {
+             items: [],
+             totalAmount: 0,
+             };
+
+       const cartReducer = (state, action) => {
+             return defaultCartState;
+       }; 
+
+    -> Reducer is initilized as shown below
+       const [cartState, dispatchCartAction] = useReducer(
+             cartReducer,
+             defaultCartState);
+4) React Ref
+    -> const amountInputRef = useRef();
+    -> Ref does not work directly, we have to use forward ref
+
+5) Forwrd Ref
+    -> import React from 'react';
+
+    -> import classes from './Input.module.css';
+
+       const Input = React.forwardRef((props, ref) => {
+         return (
+          <div className={classes.input}>
+             <label htmlFor={props.input.id}>{props.label}</label>
+             <input ref={ref} {...props.input} />
+          </div>
+         );
+      });
+
+    -> To access the ref we have to use
+       const enteredAmountText = amountInputRef.current.value; //this will always provide text
+       const enteredAmountNumber = +enteredAmountText; // Hence we have to convert it.
+
+6) UseEfeect is used for animation
+      -> import { useContext, useEffect, useState } from 'react';
+      -> const { items } = cntx;  // Object destructuring
+      -> useEffect(() => {
+         if (items.length === 0) {
+            return;
+         }
+         setbtnIsHighlighted(true);
+         const timer = setTimeout(() => {
+            setbtnIsHighlighted(false); // after 300ms its disables the animation
+         }, 300);
+
+         return () => clearTimeout(timer); clears the timer
+         }, [items]); // items are the dependency, if it changes then useEffect runs
+
+7) What is React? A javascript library for buiding user interfaces
+8) What is ReactDOM? Interface to the web   
+       -> ReactDOM does not re render everything instead it will take the diff with
+          previous snapshot and only renders that part.          
+  
+      
+   
