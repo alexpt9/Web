@@ -79,4 +79,4 @@ const DynamicColsGrid = () => {
   );
 };
 
-export default React.useMemo(DynamicColsGrid, []);
+export default React.memo(DynamicColsGrid);
