@@ -12,11 +12,22 @@ function App() {
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading((previousState) => !previousState);
     try {
-      const response = await fetch('https://swapi.dev/api/films/');
+      const response = await fetch(
+        'https://react-test-proj-5406a-default-rtdb.firebaseio.com/movies.json'
+      );
       if (!response.ok) {
         throw new Error('Something went wrong');
       }
       const data = await response.json();
+      const loadedMovies = [];
+      for(const key in data){
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
+        });
+      }
       const transformedMovies = data.results.map((movieData) => {
         return {
           id: movieData.episode_id,
