@@ -32,7 +32,7 @@ const sideBar = {
   position: 'right',
 };
 
-export function DynamicColsGrid() {
+const DynamicColsGrid = () => {
   // set to default data
   const [rowData, setRowData] = useState();
   const [colDefs, setColDefs] = useState([]);
@@ -65,19 +65,18 @@ export function DynamicColsGrid() {
   }, []);
 
   return (
-    <div
-      className="ag-theme-alpine-dark"
+    <AgGridReact
+      className='ag-theme-alpine-dark'
       style={{ width: '100%', height: 1000 }}
-    >
-      <AgGridReact
-        defaultColDef={{ sortable: true, filter: true }}
-        enableRowGroup={true}
-        rowGroupPanelShow={'onlyWhenGrouping'}
-        pagination={true}
-        rowData={rowData}
-        columnDefs={colDefs}
-        sideBar={sideBar}
-      ></AgGridReact>
-    </div>
+      defaultColDef={{ sortable: true, filter: true }}
+      enableRowGroup={true}
+      rowGroupPanelShow={'onlyWhenGrouping'}
+      pagination={true}
+      rowData={rowData}
+      columnDefs={colDefs}
+      sideBar={sideBar}
+    />
   );
-}
+};
+
+export default React.memo(DynamicColsGrid);

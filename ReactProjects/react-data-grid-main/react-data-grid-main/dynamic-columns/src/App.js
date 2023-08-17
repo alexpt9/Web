@@ -1,7 +1,8 @@
 import './App.css';
-import { DynamicColsGrid } from './dynamicColsGrid';
-import React, { useState } from 'react';
+
+import React, { useState, Fragment } from 'react';
 import Login from './Component/Login/Login';
+import Tabs from './Component/UI/Tabs';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,10 +13,10 @@ function App() {
   };
 
   return (
-    <div>
+    <Fragment>
       {!isLoggedIn && <Login onLogin={loginHandler} />}
-      {isLoggedIn && <DynamicColsGrid />}
-    </div>
+      {isLoggedIn && <Tabs />}
+    </Fragment>
   );
 }
 
