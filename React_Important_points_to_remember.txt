@@ -86,12 +86,22 @@ Important points to remember
          }, [items]); // items are the dependency, if it changes then useEffect runs
 
 7) What is React? A javascript library for buiding user interfaces
+
 8) What is ReactDOM? Interface to the web   
        -> ReactDOM does not re render everything instead it will take the diff with
           previous snapshot and only renders that part.    
+
 9) State changes, prop changes and conrext changes executes the component function
+
 10) React memo :
-       -> React memo helps to optimize the function revaluation at function based components.      
+       -> React memo helps to optimize the function revaluation at function based components.   
+
+11) You can manipulate the DOM, but it is not recommended in React. We should always leave DOM manipulation to React.
+   
+12) useReducer() when to use
+       -> If needed more power.
+       -> Should be considered if you have related pieces of state/data.
+       -> Can be helpful if you have more complex state updates.
   
       
    
