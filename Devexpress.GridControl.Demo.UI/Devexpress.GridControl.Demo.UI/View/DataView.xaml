@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-             xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
              xmlns:local="clr-namespace:Devexpress.GridControl.Demo.UI.Template"
              xmlns:behaviours="clr-namespace:Devexpress.GridControl.Demo.UI.Behaviours"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
@@ -14,7 +14,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              dx:ThemeManager.ThemeName="Office2019White"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:DataViewModel/>
     </UserControl.DataContext>
@@ -23,79 +23,171 @@
                                       CheckboxTemplate="{StaticResource CheckboxTemplate}"
                                       DefaultColumnTemplate ="{StaticResource DefaultColumnTemplate}"
                                       LookupColumnTemplate ="{StaticResource LookupColumnTemplate}"/>
+        
     </UserControl.Resources>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <dxb:BarManager>
+        <dxb:BarManager.Items>
+            <dxb:BarLinkContainerItem Name="c" ItemLinksSource="{Binding Path=ContextMenuItems}">
+                <dxb:BarLinkContainerItem.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl>
+                            <dxb:BarButtonItem Content="{Binding Path=Caption}" Command="{Binding ContextMenuCommand}" CommandParameter="{Binding Caption}" />
+                        </ContentControl>
+                    </DataTemplate>
+                </dxb:BarLinkContainerItem.ItemTemplate>
+            </dxb:BarLinkContainerItem>
+        </dxb:BarManager.Items>
 
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <dxg:GridSearchControl x:Name="gridSearch" 
-                                   dx:ThemeManager.ThemeName="Office2019White"
-                                   Height="30"
-                                   NullText="Search"
-                                   ShowClearButton="True"
-                                   ShowMRUButton="False"
-                                   NullTextForeground="Gray"
-                                   Margin="5"
-                                   Width="200"
-                                   VerticalAlignment="Bottom"
-                                   Visibility="Visible"/>
-            <dxe:ToggleSwitch SwitchBorderTemplate="{StaticResource borderTemplate}"
-                              SwitchThumbTemplate="{StaticResource thumbTemplate}"
-                              Width="100"
-                              IsChecked="{Binding IsContentAlighenedRightToLeft}"
-                              Height="30"
-                              Margin="4"
-                              Grid.Column="3"
-                              VerticalAlignment="Bottom"
-                              HorizontalAlignment="Right"/>
-        </Grid>
-        
-        <dxg:GridControl Grid.Row="1"
-                         x:Name="grid"
-                         dx:ThemeManager.ThemeName="Office2019White"
-                         dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
-                         dx:ScrollBarExtensions.IsTouchScrollBarMode="True"
-                         dxn:ScrollingSettings.ClickMode="Hover"
-                         ColumnGeneratorTemplateSelector="{StaticResource ColumnTemplateSelector}"
-                         ColumnsSource="{Binding Columns}"
-                         SelectionMode="Row"
-                         ItemsSource="{Binding Data}">
-            <dxg:GridControl.View>
-                <dxg:TableView AllowPerPixelScrolling="True"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Grid Search" 
+                           Grid.Row="1"
+                           Margin="5"
+                           TextAlignment="Center" />
+                <dxg:GridSearchControl x:Name="gridSearch" 
+                                       dx:ThemeManager.ThemeName="Office2019White"
+                                       Grid.Row="2"
+                                       Height="28"
+                                       NullText="Search"
+                                       ShowClearButton="True"
+                                       ShowMRUButton="False"
+                                       NullTextForeground="Gray"
+                                       Margin="5"
+                                       Width="200"
+                                       Visibility="Visible"/>
+                <TextBlock Text="Set Flow Direction" 
+                           Grid.Row="1"
+                            Margin="5"
+                           Grid.Column="2"
+                           TextAlignment="Right"/>
+                <dxe:ToggleSwitch SwitchBorderTemplate="{StaticResource borderTemplate}"
+                                  SwitchThumbTemplate="{StaticResource thumbTemplate}"
+                                  Grid.Row="2"
+                                  Width="100"
+                                  IsChecked="{Binding IsContentAlighenedRightToLeft}"
+                                  Height="30"
+                                  Grid.Column="2"/>
+                <TextBlock Text="Disable/Enable Horizontal scroll" 
+                           Grid.Column="3"
+                            Margin="5"
+                           Grid.Row="1"
+                           TextAlignment="Right"/>
+                <dxe:ToggleSwitch SwitchBorderTemplate="{StaticResource borderTemplate}"
+                                  SwitchThumbTemplate="{StaticResource thumbTemplate}"
+                                  Grid.Row="2"
+                                  Width="100"
+                                  IsChecked="{Binding AllowColumnAutoWidth}"
+                                  Height="30"
+                                  Grid.Column="3"/>
+                <TextBlock Text="Set Font Size"
+                           Grid.Row="1"
+                            Margin="5"
+                           TextAlignment="Center"
+                           Grid.Column="4" />
+                <dxe:ComboBoxEdit Grid.Column="4"
+                                  Grid.Row="2"
+                                  Width="100"
+                                  Height="28"
+                                  Padding="2"
+                                  Margin="5"
+                                  NullText="Set Font size"
+                                  ItemsSource="{Binding FontSizes}"
+                                  EditValue="{Binding SelectedFontSize, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Set Foreground"
+                           TextAlignment="Center"
+                            Margin="5"
+                           Grid.Row="1"
+                           Grid.Column="5" />
+                <dxe:ComboBoxEdit Grid.Column="5"
+                                  Grid.Row="2"
+                                  Width="100"
+                                  Height="28"
+                                  Padding="2"
+                                  Margin="5"
+                                  NullText="Set Foreground"
+                                  ItemsSource="{Binding Colours}"
+                                  EditValue="{Binding Colour, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Set Border Thickness"
+                           Grid.Row="1"
+                            Margin="5"
+                           Grid.Column="6" />
+                <dxe:ComboBoxEdit Grid.Column="6"
+                                  Grid.Row="2"
+                                  Width="100"
+                                  Height="28"
+                                  Padding="2"
+                                  Margin="5"
+                                  NullText="Set Row Thickness"
+                                 ItemsSource="{Binding Thickness}"
+                                 EditValue="{Binding BorderThickness, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+
+            <dxg:GridControl Grid.Row="1"
+                             x:Name="grid"
+                             dx:ThemeManager.ThemeName="Office2019White"
+                             dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                             dx:ScrollBarExtensions.AllowShiftKeyMode="True"
+                             dx:ScrollBarExtensions.AllowMouseScrolling="True"
+                             ColumnGeneratorTemplateSelector="{StaticResource ColumnTemplateSelector}"
+                             SelectionMode="Row"
+                             CurrentItem="{Binding SelectedItem}"
+                             ColumnsSource="{Binding Columns}"
+                             ItemsSource="{Binding Data}"
+                             FontSize="{Binding SelectedFontSize}">
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowPerPixelScrolling="True"
                                IsColumnMenuEnabled="False"
                                VerticalScrollbarVisibility="Auto"
                                FilterEditorShowOperandTypeIcon="True"
                                ShowIndicator="False"
                                NavigationStyle="Row"
+                               AutoWidth="{Binding AllowColumnAutoWidth}"
                                ShowCheckBoxSelectorColumn="True"
                                AllowMoveColumnToDropArea="False"
                                ShowVerticalLines="False"
                                AllowBestFit="True"
+                               BestFitMode="VisibleRows"  
+                               BestFitMaxRowCount="100" 
                                FocusedRowBorderTemplate="{x:Null}"
                                ShowGroupPanel="False"
-                               ShowFixedTotalSummary="True"
                                EditFormShowMode="Inline"
                                ShowSearchPanelMode="Never"
                                SearchControl="{Binding ElementName=gridSearch}">
-                <dxmvvm:Interaction.Behaviors>
-                        <behaviours:ColumnSortingFilteringBehaviour/>
-                    </dxmvvm:Interaction.Behaviors>
-                    <dxg:TableView.EditFormTemplate >
-                        <DataTemplate>
-                            <views:EditFormView />
-                        </DataTemplate>
-                    </dxg:TableView.EditFormTemplate>
-                </dxg:TableView>
-            </dxg:GridControl.View>
-        </dxg:GridControl>
-    </Grid>
+                        <dxg:TableView.RowCellMenuCustomizations>
+                            <dxb:BarLinkContainerItemLink BarItemName="c"/>
+                        </dxg:TableView.RowCellMenuCustomizations>
+                        <dxmvvm:Interaction.Behaviors>
+                            <behaviours:ColumnSortingFilteringBehaviour/>
+
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxg:TableView.EditFormTemplate >
+                            <DataTemplate>
+                                <views:EditFormView />
+                            </DataTemplate>
+                        </dxg:TableView.EditFormTemplate>
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </Grid>
+    </dxb:BarManager>
 </UserControl>

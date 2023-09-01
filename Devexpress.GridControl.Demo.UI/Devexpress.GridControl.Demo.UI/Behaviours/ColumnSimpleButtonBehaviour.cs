@@ -11,6 +11,7 @@ namespace Devexpress.GridControl.Demo.UI.Behaviours
 {
     public class ColumnSimpleButtonBehaviour : Behavior<Button>
     {
+        GridColumnHeader colHeader;
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -32,7 +33,7 @@ namespace Devexpress.GridControl.Demo.UI.Behaviours
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
             AssociatedObject.Visibility = Visibility.Collapsed;
-            GridColumnHeader colHeader = GetGridColumnHeader(sender);
+            colHeader = GetGridColumnHeader(sender);
             if (colHeader != null)
             {
                 colHeader.MouseEnter += ColHeader_MouseEnter;
@@ -42,7 +43,6 @@ namespace Devexpress.GridControl.Demo.UI.Behaviours
 
         private void AssociatedObject_Unloaded(object sender, RoutedEventArgs e)
         {
-            GridColumnHeader colHeader = GetGridColumnHeader(sender);
             if (colHeader != null)
             {
                 colHeader.MouseEnter -= ColHeader_MouseEnter;
@@ -52,6 +52,10 @@ namespace Devexpress.GridControl.Demo.UI.Behaviours
 
         private void ColHeader_MouseLeave(object sender, MouseEventArgs e)
         {
+            if(colHeader is null)
+                AssociatedObject.Visibility = Visibility.Collapsed;
+            if (colHeader.ColumnFilterPopup.IsPopupOpen)
+                return;
             AssociatedObject.Visibility = Visibility.Collapsed;
         }
 
@@ -64,6 +68,14 @@ namespace Devexpress.GridControl.Demo.UI.Behaviours
         {
             GridColumnHeader colHeader = GetGridColumnHeader(sender);
             colHeader?.ColumnFilterPopup.ShowPopup();
+            if(colHeader != null)
+                colHeader.ColumnFilterPopup.PopupClosed += ColumnFilterPopup_PopupClosed;
+        }
+
+        private void ColumnFilterPopup_PopupClosed(object sender, DevExpress.Xpf.Editors.ClosePopupEventArgs e)
+        {
+            AssociatedObject.Visibility = Visibility.Collapsed;
+            colHeader.ColumnFilterPopup.PopupClosed -= ColumnFilterPopup_PopupClosed;
         }
 
         private  GridColumnHeader GetGridColumnHeader(object sender)

@@ -15,6 +15,26 @@
     <converter:NumberToBooloeanConverter x:Key="numberToBooloeanConverter"/>
     <converter:DateTimeToBooleanConverter x:Key="dateTimeToBooloeanConverter"/>
 
+    <Style  TargetType="{x:Type dxg:RowControl}">
+        <!--<Setter Property="Foreground" Value="{Binding View.DataContext.Colour}"/>-->
+        <Style.Triggers>
+            <Trigger Property="SelectionState" Value="Selected">
+                <Setter Property="Background" Value="Gray"/>
+            </Trigger>
+            <Trigger Property="dxg:GridViewBase.IsFocusedRow" Value="True">
+                <Setter Property="Background" Value="#9CDCFC"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding View.DataContext.Colour, Converter={dxmvvm:StringToBooleanConverter}}" Value="True">
+                <Setter Property="Foreground" Value="{Binding View.DataContext.Colour}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="dxg:GridColumnHeader">
+        <Setter Property="Foreground" Value="{Binding View.DataContext.Colour}"/>
+        <Setter Property="FontSize" Value="{Binding View.DataContext.SelectedFontSize}"/>
+    </Style>
+
     <DataTemplate x:Key="CustomizationAreaTemplateKey">
         <Button Width="10" 
                 Height="10" 
@@ -69,22 +89,23 @@
                         Width="{Binding Path=(dxci:DependencyObjectExtensions.DataContext).Width, RelativeSource={RelativeSource Self}}"
                         HeaderCustomizationAreaTemplate="{StaticResource CustomizationAreaTemplateKey}"
                         SortMode="Value">
-            <dxg:GridColumn.CellTemplate>
-                <DataTemplate>
-                    <Border x:Name="border">
-                        <dxe:TextEdit Name="PART_Editor" />
-                    </Border>
-                    <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Value, Converter={StaticResource numberToBooloeanConverter}}" Value="true">
-                            <Setter TargetName="PART_Editor" Property="HorizontalContentAlignment" Value="Left"/>
-                            <Setter TargetName="PART_Editor" Property="DisplayFormatString" Value="N0"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Value, Converter={StaticResource dateTimeToBooloeanConverter}}" Value="true">
-                            <Setter TargetName="PART_Editor" Property="DisplayFormatString" Value="dd\/MM\/yyyy"/>
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </dxg:GridColumn.CellTemplate>
+            <dxg:GridColumn.EditSettings>
+                <dxe:TextEditSettings>
+                    <dxe:TextEditSettings.Style>
+                        <Style TargetType="dxe:TextEditSettings">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Value, Converter={StaticResource numberToBooloeanConverter}}" Value="true">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    <Setter Property="DisplayFormat" Value="N0"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Value, Converter={StaticResource dateTimeToBooloeanConverter}}" Value="true">
+                                    <Setter Property="DisplayFormat" Value="dd\/MM\/yyyy"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </dxe:TextEditSettings.Style>
+                </dxe:TextEditSettings>
+            </dxg:GridColumn.EditSettings>
         </dxg:GridColumn>
     </DataTemplate>
 
@@ -158,12 +179,12 @@
     
 
     <ControlTemplate x:Key="{dxgt:GridRowThemeKey ResourceKey=FixedLineSeparatorTemplate, ThemeName=Office2019White}" TargetType="dxg:RowFixedLineSeparatorControl">
-        <Border BorderBrush="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}" BorderThickness="0.5,0,0,0"/>
+        <Border BorderBrush="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}" BorderThickness="0,0,0,0"/>
     </ControlTemplate>
 
     <DataTemplate x:Key="{dxgt:GridColumnHeaderThemeKey ResourceKey=FixedColumnsDelimiterTemplate, ThemeName=Office2019White}">
         <Border BorderBrush="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}"
-                BorderThickness="0.5,0,0,0.5"/>
+                BorderThickness="0,0,0,0"/>
     </DataTemplate>
 
     <ControlTemplate x:Key="{dxgt:GridColumnHeaderThemeKey ResourceKey=ControlTemplate, ThemeName=Office2019White}" TargetType="{x:Type dxg:GridColumnHeaderBase}">
@@ -382,7 +403,7 @@
             <Border x:Name="Background" Background="{TemplateBinding Background}"/>
             <Border x:Name="BottomLine"
                     BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="0,0,0,0.5"
+                    BorderThickness="0,0,0,1"
                     VerticalAlignment="Bottom"/>
             <Grid x:Name="PART_LayoutPanel"/>
         </Grid>
@@ -424,6 +445,11 @@
                         TargetName="BottomLine"
                         Value="0,1,0,1"/>
             </Trigger>
+            <DataTrigger Binding="{Binding View.DataContext.BorderThickness, Converter={dxmvvm:NumericToBooleanConverter}}" Value="True">
+               <Setter Property="BorderThickness"
+                        TargetName="BottomLine"
+                        Value="{Binding View.DataContext.BorderThickness}"/>
+            </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
